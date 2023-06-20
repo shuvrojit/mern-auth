@@ -1,10 +1,10 @@
 {
-    "name": "simple-auth",
+    "name": "mern-auth",
     "version": "1.0.0",
     "description": "Simple Authentication",
     "main": "src/index.ts",
-    "repository": "https://github.com/shuvrojit/simple-auth",
-    "author": "Shuvrojit Biswas <jsuvro17@gmail.com>",
+    "repository": "https://github.com/shuvrojit/mern-auth",
+    "author": "Shuvrojit Biswas <shuvrojit.biswas17@gmail.com>",
     "license": "MIT",
     "scripts": {
         "dev": "nodemon src/index.ts",
