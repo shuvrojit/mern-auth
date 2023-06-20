@@ -97,3 +97,13 @@ dotenv will have string as input. For getting types from dotenv into your typesc
 typescript non null assertion operator !. Which means the variable will not be undefined.
 
 It took me a long time to fix this problem but define the mongouri carefully. It's the main culprit.
+
+
+
+* Testing
+Time to add testing to our project. Install supertest and jest with their @types.
+
+install ts-jest and init it within proejct.
+
+
+If you get module error use ts-jest as preset . Search for jest for typescript.

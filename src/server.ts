@@ -1,5 +1,10 @@
-import express, {Express} from "express"
+import express, { Express, Request, Response } from "express";
 
-const app: Express  = express()
+const app: Express = express();
 
-export default app
+app.get("/", (req: Request, res: Response) => {
+  res.status(200)
+  res.send("home")
+})
+
+export default app;
