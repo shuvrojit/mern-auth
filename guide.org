@@ -43,5 +43,40 @@ Add prettier and eslint script
 
 #+begin_src json
 "format": "prettier --write \"src/**/*.{ts, tsx}\""
-"lint": "prettier --write \"src/**/*.{ts, tsx}\""
+"lint": "eslint . --ext .ts"
+#+end_src
+
+Install express and types express
+
+#+begin_src shell
+yarn add express @types/express
+#+end_src
+
+
+Then create a server.ts file with these content.
+
+#+begin_src typescript
+import express, {Express} from "express"
+
+const app: Express  = express()
+
+export default app
+
+#+end_src
+
+Then add these in the index file
+
+#+begin_src typescript
+import app from "./server"
+
+const PORT: number = 8000 || process.env.PORT
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT} ...`)
+})
+#+end_src
+
+Then run the server with
+#+begin_src shell
+yarn run dev
 #+end_src
