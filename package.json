@@ -1,12 +1,28 @@
 {
-  "name": "simple-auth",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "simple-auth",
+    "version": "1.0.0",
+    "description": "Simple Authentication",
+    "main": "src/index.ts",
+    "repository": "https://github.com/shuvrojit/simple-auth",
+    "author": "Shuvrojit Biswas <jsuvro17@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "dev": "nodemon src/index.ts",
+        "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+        "lint": "eslint . --ext .ts"
+    },
+    "devDependencies": {
+        "@types/node": "^20.3.1",
+        "@typescript-eslint/eslint-plugin": "^5.50.0",
+        "eslint": "^8.0.1",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-config-standard-with-typescript": "^35.0.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-n": "^15.0.0",
+        "eslint-plugin-promise": "^6.0.0",
+        "nodemon": "^2.0.22",
+        "prettier": "^2.8.8",
+        "ts-node": "^10.9.1",
+        "typescript": "*"
+    }
 }

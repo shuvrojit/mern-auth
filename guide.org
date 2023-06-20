@@ -1,0 +1,47 @@
+#+title: Guide for this project
+#+author: Shuvrojit Biswas
+
+This is going to be a simple auth project using express and mongodb.
+
+* Introduction
+
+We're going to use the yarn package manager.
+Init the repository with git init and  yarn init. Make src diretory.
+It will be typescript project. So be sure to install all types packages.
+#+begin_src shell
+# Install dev dependencies
+yarn add typescript @types/node ts-node nodemon --save-dev
+# Init tsc config
+yarn tsc --init
+
+#+end_src
+
+Add a script command to the package.json file so that we can start coding in ts with auto restarting the server.
+
+#+begin_src json
+"scripts": {
+    "dev": "nodemon src/index.ts"
+}
+#+end_src
+
+Let's run our server to test the setup ~npm run dev~.
+
+
+Let's add formating, linting and testing. This will be a TDD approach.
+
+Add prettier and eslint for formating and linting.
+
+#+begin_src shell
+yarn add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint prettier
+#+end_src
+
+#+begin_src shell
+yarn init @eslint/config
+#+end_src
+
+Add prettier and eslint script
+
+#+begin_src json
+"format": "prettier --write \"src/**/*.{ts, tsx}\""
+"lint": "prettier --write \"src/**/*.{ts, tsx}\""
+#+end_src
