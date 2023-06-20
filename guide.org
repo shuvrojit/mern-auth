@@ -80,3 +80,16 @@ Then run the server with
 #+begin_src shell
 yarn run dev
 #+end_src
+
+
+When adding .env file be sure to use dotenv package.
+#+begin_src shell
+yarn add dotenv
+#+end_src
+
+#+begin_src typescript
+import dotenv
+dotenv.config()
+#+end_src
+
+dotenv will have string as input.
