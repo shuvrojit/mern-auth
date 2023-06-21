@@ -107,3 +107,8 @@ install ts-jest and init it within proejct.
 
 
 If you get module error use ts-jest as preset . Search for jest for typescript.
+
+Without the body parser we can't access req.body features.
+If you want to parse json data you need to specify it.
+bodyparser.json()
+bodyparser.urlencoded({extended:true})
