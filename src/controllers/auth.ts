@@ -22,8 +22,35 @@ export const createJWT = (user: IUser) => {
   return token;
 };
 
-export const protectedRoute = (req: Request, res: Response, next: NextFunction) => {
-  const bearer = req.body.headers;
-  console.log(bearer);
-  next();
+export interface UserRequest extends Request {
+  user?: Object;
+}
+
+export const protectedRoute = (req: UserRequest, res: Response, next: NextFunction) => {
+  const bearer = req.headers.authorization;
+  if(!bearer) {
+    res.status(401)
+    res.json({message: "Unauthorized"})
+    return
+  }
+
+  const [_, token] = bearer.split(" ")
+
+  if(!token) {
+    res.status(401)
+    res.json({message: "Invalid token"})
+    return
+  }
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET!)
+    req.user = user
+    console.log(user)
+    next()
+  } catch (e) {
+    console.log(e)
+    res.status(401)
+    res.json({message: `Invalid token`})
+    return
+  }
 };

@@ -15,6 +15,9 @@ app.get("/", (req: Request, res: Response) => {
 
 app.post("/signup", SignUp);
 app.post("/login", LogIn);
-app.use("/secret", protectedRoute);
+app.use("/secret", protectedRoute, (req: Request, res: Response) => {
+  res.status(200)
+  res.send("secret")
+});
 
 export default app;

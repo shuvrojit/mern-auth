@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import connect from "../db";
 import User from "../models/user";
-import { hashPassword, comparePassword } from "./auth";
+import { hashPassword, comparePassword, createJWT } from "./auth";
 
 export const SignUp = async (
   req: Request,
@@ -32,7 +32,10 @@ export const SignUp = async (
       }
       user.save();
       res.status(200);
-      res.send("User created");
+
+      const token = createJWT(user)
+      res.json({token})
+
       next();
     })
     .catch((e) => console.log(e));
@@ -57,8 +60,11 @@ export const LogIn = async (
         res.send("Wrong password");
         return;
       }
-      res.send(user);
       res.status(200);
+
+      const token = createJWT(user)
+      res.json({token})
+
       next();
     })
     .catch((e) => console.log(e));
