@@ -1,14 +1,17 @@
 import bodyParser from "body-parser";
 import express, { Express, Request, Response } from "express";
+import { SignUp } from "./controllers/auth";
 
 const app: Express = express();
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
-  res.status(200)
-  res.send("home")
-})
+  res.status(200);
+  res.send("home");
+});
+
+app.post("/signup", SignUp);
 
 export default app;

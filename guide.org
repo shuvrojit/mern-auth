@@ -99,7 +99,6 @@ typescript non null assertion operator !. Which means the variable will not be u
 It took me a long time to fix this problem but define the mongouri carefully. It's the main culprit.
 
 
-
 * Testing
 Time to add testing to our project. Install supertest and jest with their @types.
 
@@ -112,3 +111,13 @@ Without the body parser we can't access req.body features.
 If you want to parse json data you need to specify it.
 bodyparser.json()
 bodyparser.urlencoded({extended:true})
+
+app cors
+
+* Mongodb
+
+#+begin_src js
+
+#+end_src
+
+typescript error if expression expected somewhere near export default and connst . Declare const and declare that export in a separate line.

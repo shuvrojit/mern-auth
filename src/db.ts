@@ -4,7 +4,7 @@ import "dotenv/config";
 const DB_URL: string = process.env.mongourl!;
 
 const connect = () => {
-  return mongoose.connect(DB_URL)
-}
+  return mongoose.connect(DB_URL);
+};
 
-export default connect
+export default connect;
