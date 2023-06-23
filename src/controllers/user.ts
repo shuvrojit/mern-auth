@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import connect from "../db";
 import User from "../models/user";
+import { hashPassword, comparePassword } from "./auth";
 
 export const SignUp = async (
   req: Request,
@@ -9,9 +10,10 @@ export const SignUp = async (
 ) => {
   connect()
     .then(async () => {
+      const hash = await hashPassword(req.body.password);
       const query = User.where({ userName: req.body.userName });
-      const userExists = await query.findOne();
-      if (userExists) {
+      const doesExists = await query.findOne();
+      if (doesExists) {
         res.status(301);
         res.send("User alreay exists");
         return;
@@ -21,7 +23,7 @@ export const SignUp = async (
         lastName: req.body.lastName,
         email: req.body.email,
         userName: req.body.userName,
-        password: req.body.password,
+        password: hash,
       });
       if (!user) {
         res.status(401);
@@ -49,7 +51,8 @@ export const LogIn = async (
         res.send("User not found");
         return;
       }
-      if (req.body.password !== user.password) {
+      const isValid = await comparePassword(req.body.password, user.password);
+      if (!isValid) {
         res.status(401);
         res.send("Wrong password");
         return;

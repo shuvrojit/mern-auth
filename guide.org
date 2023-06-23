@@ -123,3 +123,7 @@ app cors
 typescript error if expression expected somewhere near export default and connst . Declare const and declare that export in a separate line.
 
 Added middleware. Signup and login
+
+How to get the objct id from mongodb
+~d = findOne()._id~
+~d.toString()~
