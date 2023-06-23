@@ -121,3 +121,5 @@ app cors
 #+end_src
 
 typescript error if expression expected somewhere near export default and connst . Declare const and declare that export in a separate line.
+
+Added middleware. Signup and login
