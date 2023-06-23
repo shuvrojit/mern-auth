@@ -1,6 +1,6 @@
 import bodyParser from "body-parser";
 import express, { Express, Request, Response } from "express";
-import { SignUp } from "./controllers/auth";
+import { SignUp, LogIn } from "./controllers/auth";
 
 const app: Express = express();
 
@@ -13,5 +13,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.post("/signup", SignUp);
+app.post("/login", LogIn);
 
 export default app;
