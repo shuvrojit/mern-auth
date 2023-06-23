@@ -33,8 +33,8 @@ export const SignUp = async (
       user.save();
       res.status(200);
 
-      const token = createJWT(user)
-      res.json({token})
+      const token = createJWT(user);
+      res.json({ token });
 
       next();
     })
@@ -62,8 +62,8 @@ export const LogIn = async (
       }
       res.status(200);
 
-      const token = createJWT(user)
-      res.json({token})
+      const token = createJWT(user);
+      res.json({ token });
 
       next();
     })
