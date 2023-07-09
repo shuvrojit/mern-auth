@@ -1,11 +1,12 @@
 #+title: Guide for this project
 #+author: Shuvrojit Biswas
 
-This is going to be a simple auth project using express and mongodb.
+In this article, you're gonna learn how to authenticate api's. We're gonna use typescript and mongo fot this.
+
 
 * Introduction
 
-We're going to use the yarn package manager.
+We're going to use the yarn package manager. Npm is also good.
 Init the repository with git init and  yarn init. Make src diretory.
 It will be typescript project. So be sure to install all types packages.
 #+begin_src shell
@@ -98,8 +99,12 @@ typescript non null assertion operator !. Which means the variable will not be u
 
 It took me a long time to fix this problem but define the mongouri carefully. It's the main culprit.
 
+* Project Structure
+
+First we're gonna setup our development environment. ~typescript~ for the language itself is a developer tool. It doesn't go to production. ~Eslint~ for linting, ~prettier~ for automatic formating, ~nodemon~ and ~ts-node~ for compiling and running typescript. For testing we have ~jest~ and ~supertest~.  You can install them now or later as we continue to progress.
 
 * Testing
+
 Time to add testing to our project. Install supertest and jest with their @types.
 
 install ts-jest and init it within proejct.
@@ -129,23 +134,9 @@ How to get the objct id from mongodb
 ~d.toString()~
 
 #+begin_src restclient
-GET http://localhost:8000/
+GET http://localhost:8000/secret
 #+end_src
 
-#+RESULTS:
-#+BEGIN_SRC html
-home
-<!-- GET http://localhost:8000/ -->
-<!-- HTTP/1.1 200 OK -->
-<!-- X-Powered-By: Express -->
-<!-- Content-Type: text/html; charset=utf-8 -->
-<!-- Content-Length: 4 -->
-<!-- ETag: W/"4-6DJJvTunmTLhb7H7UQDa+t6ZVMI" -->
-<!-- Date: Fri, 23 Jun 2023 01:25:42 GMT -->
-<!-- Connection: keep-alive -->
-<!-- Keep-Alive: timeout=5 -->
-<!-- Request duration: 0.063587s -->
-#+END_SRC
 
 #+begin_src restclient
 POST http://localhost:8000/signup
@@ -153,23 +144,6 @@ Content-Type: application/json
 
 {"userName": "yor1", "password": "yor"}
 #+end_src
-
-#+RESULTS:
-#+BEGIN_SRC js
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTUwNjIzNTk3MTc4MDU1Njc3NDYyMiIsInVzZXJuYW1lIjoieW9yMSIsImlhdCI6MTY4NzQ4ODAzNX0.uvG3Mg4C1Ibzlf232rB6xUA_qI0cp3sONq8m1BF_mAA"
-}
-// POST http://localhost:8000/signup
-// HTTP/1.1 200 OK
-// X-Powered-By: Express
-// Content-Type: application/json; charset=utf-8
-// Content-Length: 184
-// ETag: W/"b8-gOMAiaiz9JdII80L7OrVdfPXFa0"
-// Date: Fri, 23 Jun 2023 02:40:35 GMT
-// Connection: keep-alive
-// Keep-Alive: timeout=5
-// Request duration: 0.041073s
-#+END_SRC
 
 #+begin_src restclient
 POST http://localhost:8000/login/
@@ -181,21 +155,19 @@ Content-Type: application/json
 #+RESULTS:
 #+BEGIN_SRC js
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTUwNjIzNTk3MTc4MDU1Njc3NDYyMiIsInVzZXJuYW1lIjoieW9yMSIsImlhdCI6MTY4NzQ4ODA2Nn0.-sMtkFAYI3oxirAOKMrQv3QXBemHAPIcGXLcyWgpM20"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTUwNjIzNTk3MTc4MDU1Njc3NDYyMiIsInVzZXJuYW1lIjoieW9yMSIsImlhdCI6MTY4ODQ5MDA0Mn0.-dcfUKMeQtZjjiwj2NxFWBDONueQgvAKtdKHe70Os44"
 }
 // POST http://localhost:8000/login/
 // HTTP/1.1 200 OK
 // X-Powered-By: Express
 // Content-Type: application/json; charset=utf-8
 // Content-Length: 184
-// ETag: W/"b8-PkEBXMZdV4+CtvojHVXsJAN14zQ"
-// Date: Fri, 23 Jun 2023 02:41:06 GMT
+// ETag: W/"b8-SBCzdHIuLuphgJ/Zso1hSxTOuYY"
+// Date: Tue, 04 Jul 2023 17:00:42 GMT
 // Connection: keep-alive
 // Keep-Alive: timeout=5
-// Request duration: 0.050956s
+// Request duration: 0.065016s
 #+END_SRC
-
-
 
 #+begin_src restclient
 :bearer = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTUwNjIzNTk3MTc4MDU1Njc3NDYyMiIsInVzZXJuYW1lIjoieW9yMSIsImlhdCI6MTY4NzQ4ODA2Nn0.-sMtkFAYI3oxirAOKMrQv3QXBemHAPIcGXLcyWgpM20
@@ -206,19 +178,3 @@ Content-Type: application/json/
 
 #+end_src
 
-#+RESULTS:
-#+BEGIN_SRC js
-{
-  "message": "Unauthorized"
-}
-// POST http://localhost:8000/secret/
-// HTTP/1.1 401 Unauthorized
-// X-Powered-By: Express
-// Content-Type: application/json; charset=utf-8
-// Content-Length: 26
-// ETag: W/"1a-pljHtlo127JYJR4E/RYOPb6ucbw"
-// Date: Fri, 23 Jun 2023 02:41:30 GMT
-// Connection: keep-alive
-// Keep-Alive: timeout=5
-// Request duration: 0.055375s
-#+END_SRC
