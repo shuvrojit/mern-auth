@@ -1,9 +1,12 @@
 import bodyParser from "body-parser";
 import express, { Express, Request, Response } from "express";
 import { SignUp, LogIn } from "../controllers/user";
+import connectDB from "./db"
 import { protectedRoute, adminRoute } from "../middleware/auth";
 
 const app: Express = express();
+
+connectDB()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

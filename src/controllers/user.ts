@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import connect from "../config/db";
 import User from "../models/user";
 import { hashPassword, comparePassword, createJWT } from "../middleware/auth";
 
@@ -8,8 +7,7 @@ export const SignUp = async (
   res: Response,
   next: NextFunction
 ) => {
-  connect()
-    .then(async () => {
+    (async () => {
       const hash = await hashPassword(req.body.password);
       const query = User.where({ userName: req.body.userName });
       const doesExists = await query.findOne();
@@ -39,7 +37,6 @@ export const SignUp = async (
 
       next();
     })
-    .catch((e) => console.log(e));
 };
 
 export const LogIn = async (
@@ -47,8 +44,7 @@ export const LogIn = async (
   res: Response,
   next: NextFunction
 ) => {
-  connect()
-    .then(async () => {
+ (async () => {
       const query = User.where({ userName: req.body.userName });
       const user = await query.findOne();
       if (!user) {
@@ -68,5 +64,4 @@ export const LogIn = async (
 
       next();
     })
-    .catch((e) => console.log(e));
 };
