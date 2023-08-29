@@ -8,3 +8,15 @@ export interface IUser extends Document {
   password: string;
   role: string;
 }
+
+
+declare global {
+  namespace Express {
+    interface Request {
+      user: any;
+    }
+  }
+}
+
+
+export {};

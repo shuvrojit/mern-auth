@@ -1,14 +1,5 @@
 import mongoose from "mongoose";
-
-export interface IUser {
-  id: string;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  password: string;
-  date: Date;
-}
+import {IUser} from "../types"
 
 const userSchema = new mongoose.Schema<IUser>({
   firstName: String,
@@ -23,10 +14,11 @@ const userSchema = new mongoose.Schema<IUser>({
     type: String,
     required: true,
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user"
+  }
 });
 
 const User = mongoose.model("user", userSchema);

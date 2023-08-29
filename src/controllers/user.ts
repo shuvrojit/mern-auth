@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import connect from "../db";
+import connect from "../config/db";
 import User from "../models/user";
-import { hashPassword, comparePassword, createJWT } from "./auth";
+import { hashPassword, comparePassword, createJWT } from "../middleware/auth";
 
 export const SignUp = async (
   req: Request,
@@ -24,6 +24,7 @@ export const SignUp = async (
         email: req.body.email,
         userName: req.body.userName,
         password: hash,
+        role: req.body.role,
       });
       if (!user) {
         res.status(401);
