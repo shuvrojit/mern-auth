@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
+import asyncHandler from "../middleware/async-handler";
 import User from "../models/user";
 import { hashPassword, comparePassword, createJWT } from "../middleware/auth";
 
-export const SignUp = async (req: Request, res: Response) => {
+export const SignUp = asyncHandler(async (req: Request, res: Response) => {
   const hash = await hashPassword(req.body.password);
   const userExists = await User.findOne({ userName: req.body.userName });
   if (userExists) {
@@ -26,9 +27,9 @@ export const SignUp = async (req: Request, res: Response) => {
 
   const token = createJWT(user);
   res.status(200).json({ token });
-};
+});
 
-export const LogIn = async (req: Request, res: Response) => {
+export const LogIn = asyncHandler(async (req: Request, res: Response) => {
   const query = User.where({ userName: req.body.userName });
   const user = await query.findOne();
   if (!user) {
@@ -45,4 +46,4 @@ export const LogIn = async (req: Request, res: Response) => {
 
   const token = createJWT(user);
   res.json({ token });
-};
+});
