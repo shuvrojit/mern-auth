@@ -2,8 +2,15 @@ import { Request, Response } from "express";
 import asyncHandler from "../middleware/async-handler";
 import User from "../models/user";
 import { hashPassword, comparePassword, createJWT } from "../middleware/auth";
+import { validationResult } from "express-validator";
 
 export const SignUp = asyncHandler(async (req: Request, res: Response) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).json({ success: false, errors: errors.array() });
+    return;
+  }
+
   const hash = await hashPassword(req.body.password);
   const userExists = await User.findOne({ userName: req.body.userName });
   if (userExists) {
@@ -26,7 +33,7 @@ export const SignUp = asyncHandler(async (req: Request, res: Response) => {
   user.save();
 
   const token = createJWT(user);
-  res.status(200).json({ token });
+  res.status(200).json({ success: true, token });
 });
 
 export const LogIn = asyncHandler(async (req: Request, res: Response) => {
@@ -45,5 +52,5 @@ export const LogIn = asyncHandler(async (req: Request, res: Response) => {
   res.status(200);
 
   const token = createJWT(user);
-  res.json({ token });
+  res.json({ success: true, token });
 });
