@@ -1,13 +1,15 @@
 import mongoose from "mongoose";
 import "dotenv/config";
 
-const DB_URL: string = process.env.mongourl!;
+const DB_URL: string = process.env.mongoURL!;
 
-const connectDB = () => {
+const connectDB = async () => {
   try {
-    return mongoose.connect(DB_URL);
+    await mongoose.connect(DB_URL);
+    process.stdout.write("Database connected\n");
   } catch (e) {
-    console.log(e)
+    process.stdout.write(`Error ${e}\n`);
+    process.exit(1);
   }
 };
 

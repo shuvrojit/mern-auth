@@ -1,4 +1,4 @@
-import {Document} from "mongoose"
+import { Document } from "mongoose";
 
 export interface IUser extends Document {
   firstName: string;
@@ -9,7 +9,6 @@ export interface IUser extends Document {
   role: string;
 }
 
-
 declare global {
   namespace Express {
     interface Request {
@@ -17,6 +16,5 @@ declare global {
     }
   }
 }
-
 
 export {};

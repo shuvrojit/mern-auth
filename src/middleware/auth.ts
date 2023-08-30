@@ -22,8 +22,6 @@ export const createJWT = (user: IUser) => {
   return token;
 };
 
-
-
 export const protectedRoute = (
   req: Request,
   res: Response,
@@ -56,20 +54,12 @@ export const protectedRoute = (
   }
 };
 
-
-export const adminRoute = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-
-  if(req.user.role === "admin") {
-    next()
+export const adminRoute = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user.role === "admin") {
+    next();
   } else {
-    res.status(401)
-    res.json({message: "You're not admin"})
-    return
+    res.status(401);
+    res.json({ message: "You're not admin" });
+    return;
   }
 };
-
-
