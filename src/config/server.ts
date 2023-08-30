@@ -1,5 +1,6 @@
-import bodyParser from "body-parser";
 import express, { Express, Request, Response } from "express";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import connectDB from "./db";
 import { protectedRoute, adminRoute } from "../middleware/auth";
 import morgan from "morgan";
@@ -10,13 +11,15 @@ const app: Express = express();
 
 connectDB();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser())
+
 app.use(morgan("combined"));
 app.use(cors());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 app.get("/", (req: Request, res: Response) => {
+  console.log(req.cookies)
   res.status(200);
   res.send("home public");
 });

@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { IUser } from "../types";
+import User from "../models/user"
 
 export const hashPassword = (passwd: string) => {
   return bcrypt.hash(passwd, 5);
@@ -16,6 +17,7 @@ export const createJWT = (user: IUser) => {
     {
       id: user.id.toString(),
       username: user.userName,
+      role: user.role,
     },
     process.env.JWT_SECRET!
   );
@@ -27,18 +29,19 @@ export const protectedRoute = (
   res: Response,
   next: NextFunction
 ) => {
-  const bearer = req.headers.authorization;
-  if (!bearer) {
-    res.status(401);
-    res.json({ message: "Unauthorized" });
-    return;
-  }
+  const token = req.cookies.jwtToken
+  // const bearer = req.headers.authorization;
+  // if (!bearer) {
+    // res.status(401);
+    // res.json({ message: "Unauthorized" });
+    // return;
+  // }
 
-  const [_, token] = bearer.split(" ");
+  // const [_, token] = bearer.split(" ");
 
   if (!token) {
     res.status(401);
-    res.json({ message: "Invalid token" });
+    res.json({ message: "Unauthorized!" });
     return;
   }
 
@@ -55,7 +58,7 @@ export const protectedRoute = (
 };
 
 export const adminRoute = (req: Request, res: Response, next: NextFunction) => {
-  if (req.user.role === "admin") {
+  if (req.user.role == "admin") {
     next();
   } else {
     res.status(401);

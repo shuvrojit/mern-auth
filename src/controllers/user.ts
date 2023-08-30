@@ -33,7 +33,8 @@ export const SignUp = asyncHandler(async (req: Request, res: Response) => {
   user.save();
 
   const token = createJWT(user);
-  res.status(200).json({ success: true, token });
+  // res.status(200).json({ success: true, token });
+  res.status(200).cookie("jwtToken", token ).end()
 });
 
 export const LogIn = asyncHandler(async (req: Request, res: Response) => {
@@ -49,8 +50,7 @@ export const LogIn = asyncHandler(async (req: Request, res: Response) => {
     res.send("Wrong password");
     return;
   }
-  res.status(200);
 
   const token = createJWT(user);
-  res.json({ success: true, token });
+  res.status(200).cookie("jwtToken", token ).end()
 });
