@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { IUser } from "../types";
-import User from "../models/user"
 
 export const hashPassword = (passwd: string) => {
   return bcrypt.hash(passwd, 5);
@@ -29,12 +28,12 @@ export const protectedRoute = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies.jwtToken
+  const token = req.cookies.jwtToken;
   // const bearer = req.headers.authorization;
   // if (!bearer) {
-    // res.status(401);
-    // res.json({ message: "Unauthorized" });
-    // return;
+  // res.status(401);
+  // res.json({ message: "Unauthorized" });
+  // return;
   // }
 
   // const [_, token] = bearer.split(" ");

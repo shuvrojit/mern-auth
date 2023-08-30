@@ -13,13 +13,13 @@ connectDB();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use(morgan("combined"));
 app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  console.log(req.cookies)
+  console.log(req.cookies);
   res.status(200);
   res.send("home public");
 });
