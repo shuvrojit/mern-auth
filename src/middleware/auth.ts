@@ -50,9 +50,7 @@ export const protectedRoute = (
     req.user = user;
     next();
   } catch (e) {
-    console.log(e);
-    res.status(401);
-    res.json({ message: `Invalid token` });
+    res.status(401).json({ message: `Invalid token`, error: e });
     return;
   }
 };
