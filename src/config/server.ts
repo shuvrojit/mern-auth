@@ -1,10 +1,10 @@
 import bodyParser from "body-parser";
 import express, { Express, Request, Response } from "express";
-import { SignUp, LogIn } from "../controllers/user";
 import connectDB from "./db"
 import { protectedRoute, adminRoute } from "../middleware/auth";
 import morgan from "morgan"
 import cors from "cors"
+import userRouter from "../routes/user"
 
 const app: Express = express();
 
@@ -21,8 +21,8 @@ app.get("/", (req: Request, res: Response) => {
   res.send("home");
 });
 
-app.post("/signup", SignUp);
-app.post("/login", LogIn);
+app.use(userRouter)
+
 app.use("/secret", protectedRoute, (req: Request, res: Response) => {
   res.status(200);
   res.send("secret");
