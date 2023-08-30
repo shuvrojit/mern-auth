@@ -18,10 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200);
-  res.send("home");
+  res.send("home public");
 });
-
-app.use(userRouter);
 
 app.use("/secret", protectedRoute, (req: Request, res: Response) => {
   res.status(200);
@@ -32,5 +30,7 @@ app.use("/admin", protectedRoute, adminRoute, (req: Request, res: Response) => {
   res.status(200);
   res.send("admin");
 });
+
+app.use("/users", userRouter);
 
 export default app;
