@@ -1,0 +1,18 @@
+version: "3"
+services:
+    express:
+        build:
+            context: .
+        ports:
+            - "8000:8000"
+        depends_on:
+            - mongo
+        environment:
+            mongoURL: mongodb://mongo:27017/simple-auth
+            PORT: 8000
+            JWT_SECRET: dragon
+
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
