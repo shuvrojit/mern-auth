@@ -1,1 +1,10 @@
-### This is a simple and minimalist mern authentication application which can be expanded upon. It's just he base. Nothing Extra. There's a =guide.org= file which is a step by step documentation with code.
+# Introduction
+This project is developed with Node(Express), mongodb(mongoose) and docker container.
+
+## user routes
+`GET {baseurl}/users/signup`
+`GET {baseurl}/users/login`
+`GET {baseurl}/users/logout`
+
+#### signup, login will fill the cookie with jwtToken
+#### logout will clear the cookie with jwtToken
